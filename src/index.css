@@ -95,9 +95,3 @@ button:focus-visible {
     scrollbar-width: none; /* Firefox */
   }
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
