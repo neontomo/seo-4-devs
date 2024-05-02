@@ -1,5 +1,3 @@
-import { ArrowSquareOut } from '@phosphor-icons/react'
-
 function Button({
   icon,
   text,
