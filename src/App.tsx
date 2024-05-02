@@ -448,7 +448,8 @@ function App() {
               text="Test with fake data"
               onClick={() => {
                 const fakeData = {
-                  title: 'SEO 4 Devs',
+                  title:
+                    'SEO 4 Devs - A tool for developers to improve their SEO',
                   url: 'https://seo-4-devs.netlify.app/',
                   description: `This tool is for developers who want to improve their site's SEO. It generates meta tags for Facebook, Twitter, Google Analytics and basic SEO tags.`,
                   keywords: `SEO, search engine optimization, developers, web development, meta tags, Facebook, Twitter, Google Analytics, canonical link, description, keywords, on-page SEO`,
@@ -564,7 +565,7 @@ function App() {
                     />
                     <Button
                       icon={<ArrowSquareOut />}
-                      text="Test"
+                      text="Test on Facebook"
                       onClick={() => {
                         if (!testURL()) {
                           createMessage(
@@ -623,7 +624,7 @@ function App() {
                     />
                     <Button
                       icon={<ArrowSquareOut />}
-                      text="Test"
+                      text="Test on Twitter"
                       onClick={() => {
                         if (!url || url.length < 1 || !url.includes('http')) {
                           createMessage(
@@ -729,49 +730,6 @@ function App() {
           </div>
         </BigView>
 
-        <BigView>
-          <div>
-            <h2 className="text-center">Useful Stuff</h2>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <Card
-                title="External SEO Tools"
-                detailsDescription="Check your site with these tools to ensure it's optimised for search engines and social media. As these are external tools, I can't guarantee their availability or accuracy."
-                actions={
-                  <>
-                    {externalTools.map((tool, index) => (
-                      <Button
-                        icon={<ArrowSquareOut />}
-                        key={index}
-                        text={tool.title}
-                        onClick={tool.onClick}
-                      />
-                    ))}
-                  </>
-                }
-              />
-              <Card
-                title="SEO Common Words"
-                detailsDescription="The lingo used by SEO experts."
-                details={[
-                  `SEO - Search Engine Optimisation`,
-                  `SERP - Search Engine Results Page`,
-                  `CTR - Click Through Rate`,
-                  `CMS - Content Management System`,
-                  `GA - Google Analytics`,
-                  `GSC - Google Search Console`,
-                  `On Page SEO - Optimising content on your site`,
-                  `Off Page SEO - Optimising content off your site`,
-                  `Backlink - A link from another site to yours`,
-                  `Keyword - A word or phrase that describes your content`,
-                  `Meta Tags - Information about your site for search engines`,
-                  `Canonical - The main URL of your site`,
-                  `Alt Text - Descriptive text for images`
-                ]}
-              />
-            </div>
-          </div>
-        </BigView>
-
         <SmallView>
           <div>
             <Card
@@ -805,7 +763,6 @@ function App() {
                                 )}
                                 {item.links && (
                                   <>
-                                    <h5 className="m-0 mt-4">Resources:</h5>
                                     <div className="flex flex-row gap-4 items-center justify-start text-xs mt-3 flex-wrap">
                                       {item.links.map((link, index: number) => (
                                         <Button
@@ -831,6 +788,49 @@ function App() {
             />
           </div>
         </SmallView>
+
+        <BigView>
+          <div>
+            <h2 className="text-center">Useful Stuff</h2>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <Card
+                title="External SEO Tools"
+                detailsDescription="Check your site with these tools to ensure it's optimised for search engines and social media. As these are external tools, I can't guarantee their availability or accuracy."
+                actions={
+                  <>
+                    {externalTools.map((tool, index) => (
+                      <Button
+                        icon={<ArrowSquareOut />}
+                        key={index}
+                        text={tool.title}
+                        onClick={tool.onClick}
+                      />
+                    ))}
+                  </>
+                }
+              />
+              <Card
+                title="SEO Common Words"
+                detailsDescription="The lingo used by SEO experts."
+                details={[
+                  `SEO - Search Engine Optimisation`,
+                  `SERP - Search Engine Results Page`,
+                  `CTR - Click Through Rate`,
+                  `CMS - Content Management System`,
+                  `GA - Google Analytics`,
+                  `GSC - Google Search Console`,
+                  `On Page SEO - Optimising content on your site`,
+                  `Off Page SEO - Optimising content off your site`,
+                  `Backlink - A link from another site to yours - builds authority`,
+                  `Keyword - A word or phrase that describes your content`,
+                  `Meta Tags - Information about your site for search engines`,
+                  `Canonical - Tells Search Engines the main URL of your site`,
+                  `Alt Text - Descriptive text for images (alt="Description")`
+                ]}
+              />
+            </div>
+          </div>
+        </BigView>
 
         <BigView>
           <div>
