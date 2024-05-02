@@ -483,9 +483,9 @@ function App() {
                   inputElement.value = value
                 })
 
-                /* document
+                document
                   .getElementById('header-results')
-                  ?.scrollIntoView({ behavior: 'smooth' }) */
+                  ?.scrollIntoView({ behavior: 'smooth' })
               }}
             />
           </div>
