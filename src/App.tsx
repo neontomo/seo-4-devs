@@ -148,7 +148,7 @@ function App() {
     {
       title: 'OG Image Checker',
       onClick: () => {
-        window.open(`https://www.opengraph.xyz/url/${url}`, '_blank')
+        window.open(`https://www.opengraph.xyz/`, '_blank')
       }
     },
     {
@@ -429,7 +429,7 @@ function App() {
                   </div>
                 )}
                 {input.minLength && input.minLength > 1 && (
-                  <p className="text-xs m-0 mb-6">
+                  <div className="text-xs m-0 mb-6">
                     <div className="flex flex-row gap-4 items-center text-xs text-gray-500">
                       <span className="p-0">
                         <span id={`progress-${input.name}-value`}>0</span>/
@@ -441,7 +441,7 @@ function App() {
                         value={0}
                         max={input.minLength}></progress>
                     </div>
-                  </p>
+                  </div>
                 )}
               </div>
             ))}
@@ -483,9 +483,9 @@ function App() {
                   inputElement.value = value
                 })
 
-                document
+                /* document
                   .getElementById('header-results')
-                  ?.scrollIntoView({ behavior: 'smooth' })
+                  ?.scrollIntoView({ behavior: 'smooth' }) */
               }}
             />
           </div>
@@ -506,6 +506,7 @@ function App() {
                     placeholder="Basic SEO tags will appear here."
                     className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
                     value={basicSEOTags}
+                    readOnly
                     onClick={(e) => {
                       e.currentTarget.select()
                     }}></textarea>
@@ -544,6 +545,7 @@ function App() {
                     placeholder="Facebook metatags will appear here."
                     className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
                     value={facebookMetaTags}
+                    readOnly
                     onClick={(e) => {
                       e.currentTarget.select()
                     }}></textarea>
@@ -602,6 +604,7 @@ function App() {
                     placeholder="Twitter metatags will appear here."
                     className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
                     value={twitterMetaTags}
+                    readOnly
                     onClick={(e) => {
                       e.currentTarget.select()
                     }}></textarea>
@@ -660,6 +663,7 @@ function App() {
                     placeholder="Google Analytics script will appear here."
                     className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
                     value={googleAnalyticsScript}
+                    readOnly
                     onClick={(e) => {
                       e.currentTarget.select()
                     }}></textarea>
@@ -791,12 +795,8 @@ function App() {
                   {seoChecklist &&
                     Object.keys(seoChecklist as ChecklistType).map(
                       (category: string, index: number) => (
-                        <>
-                          <h3
-                            key={index}
-                            className="text-lg">
-                            {category}
-                          </h3>
+                        <div key={index}>
+                          <h3 className="text-lg m-0 mt-6">{category}</h3>
                           {(seoChecklist as any)[category].map(
                             (item: ChecklistItem, index: number) => (
                               <div
@@ -836,7 +836,7 @@ function App() {
                               </div>
                             )
                           )}
-                        </>
+                        </div>
                       )
                     )}
                 </div>

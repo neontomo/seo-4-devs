@@ -17,14 +17,14 @@ function Card({
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
           {children}
-          <p className="text-sm">
+          <div className="text-sm">
             {detailsDescription}
             <ul className="text-xs text-gray-500 leading-6">
-              {details?.map((detail: string) => (
-                <li key={detail}>{detail}</li>
+              {details?.map((detail: string, index: number) => (
+                <li key={index}>{detail}</li>
               ))}
             </ul>
-          </p>
+          </div>
           <div className="card-actions justify-start">{actions}</div>
         </div>
       </div>
