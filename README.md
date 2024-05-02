@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+# SEO 4 Devs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A tool for developers to improve their SEO
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+SEO 4 Devs is a free tool that helps web developers and website owners optimize their sites for search engines. It generates the necessary meta tags for Facebook, Twitter, Google Analytics, and basic SEO, making it easy to implement best practices.
 
-## Expanding the ESLint configuration
+The tool was created by Tomo, a web developer and SEO consultant, to address the need for simple yet effective SEO tools for developers.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Key Features
 
-- Configure the top-level `parserOptions` property like this:
+- Basic SEO Tags: Provides the HTML code for canonical links, meta descriptions, and keywords.
+- Facebook Meta Tags: Generates the necessary tags to ensure your site looks great when shared on Facebook.
+- Twitter Meta Tags: Generates the necessary tags to ensure your site looks great when shared on Twitter.
+- Google Analytics: Includes the code to set up Google Analytics tracking on your site.
+- SEO Checklist: Offers a comprehensive checklist of on-page SEO best practices, including keyword research, content optimization, image optimization, and more.
+- External SEO Tools: Links to a variety of external SEO tools that can be used to further analyze and optimize your site.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## How to Use
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Visit the SEO 4 Devs website.
+2. Copy the provided HTML code for the features you want to implement.
+3. Paste the code into the <head> section of your website.
+4. Test your changes using the provided tools.
+
+## Feedback and Contributions
+
+If you have any suggestions or feedback, or would like to contribute to the project, please reach out to Tomo:
+
+- Email: tomo@neontomo.com
+- LinkedIn: https://www.linkedin.com/in/tomo-myrman

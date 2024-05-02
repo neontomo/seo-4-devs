@@ -6,6 +6,7 @@ import Button from './components/Button'
 import { ArrowSquareOut, Copy, Envelope } from '@phosphor-icons/react'
 import { ChecklistItem, ChecklistType, seoChecklist } from './assets/checklist'
 import * as yup from 'yup'
+import NavBar from './components/NavBar'
 
 function App() {
   const [title, setTitle] = useState('')
@@ -341,557 +342,565 @@ function App() {
   }, [url, description, title, ogImage, googleAnalyticsId, keywords])
 
   return (
-    <main className="flex flex-col min-h-[100vh]">
-      <div className="my-32 grow">
-        <SmallView noGap>
-          <nav className="flex flex-col gap-4 mb-16">
-            <h1 className="text-center m-0">SEO 4 Devs</h1>
-            <h4 className="text-center m-0">
-              Work hard on your next client instead
-            </h4>
-          </nav>
+    <>
+      <NavBar />
+      <main className="flex flex-col min-h-[100vh]">
+        <div className="my-32 grow">
+          <SmallView noGap>
+            <nav className="flex flex-col gap-4 mb-16">
+              <h1 className="text-center m-0">SEO 4 Devs</h1>
+              <h4 className="text-center m-0">
+                Work hard on your next client instead
+              </h4>
+            </nav>
 
-          <form className="flex flex-col gap-4 w-full mx-auto">
-            {inputs.map((input, index) => (
-              <div
-                className="grid grid-cols-1 gap-2 w-full box-border"
-                key={index}>
-                <input
-                  id={`input-${input.name}`}
-                  className={`px-4 w-full box-border text-xs`}
-                  type={input.type}
-                  placeholder={input.label}
-                  autoFocus={index === 0}
-                  onBlur={(e) => {
-                    if (
-                      input.yup &&
-                      !input.yup.isValidSync(e.target.value.trim())
-                    ) {
-                      createMessage(
-                        input.yupError || 'Please provide valid info',
-                        'error'
-                      )
-                      return
-                    }
-                  }}
-                  onChange={(e) => {
-                    input.update(e.target.value.trim())
-                    const progress = e.target.value.trim().length
-                    const progressElement = document.getElementById(
-                      `progress-${input.name}`
-                    )
-                    const progressValueElement = document.getElementById(
-                      `progress-${input.name}-value`
-                    )
-                    if (progressValueElement) {
-                      progressValueElement.innerText = progress.toString()
-                    }
-                    if (progressElement && input.minLength) {
-                      progressElement.setAttribute('value', progress.toString())
-                      if (progress > input.minLength) {
-                        progressElement.classList.remove('progress-success')
-                        progressElement.classList.remove('progress-warning')
-                        progressElement.classList.add('progress-error')
-                      } else if (progress < input.minLength / 2) {
-                        progressElement.classList.remove('progress-error')
-                        progressElement.classList.remove('progress-success')
-                        progressElement.classList.add('progress-warning')
-                      } else {
-                        progressElement.classList.remove('progress-error')
-                        progressElement.classList.remove('progress-warning')
-                        progressElement.classList.add('progress-success')
+            <form className="flex flex-col gap-4 w-full mx-auto">
+              {inputs.map((input, index) => (
+                <div
+                  className="grid grid-cols-1 gap-2 w-full box-border"
+                  key={index}>
+                  <input
+                    id={`input-${input.name}`}
+                    className={`px-4 w-full box-border text-xs`}
+                    type={input.type}
+                    placeholder={input.label}
+                    autoFocus={index === 0}
+                    onBlur={(e) => {
+                      if (
+                        input.yup &&
+                        !input.yup.isValidSync(e.target.value.trim())
+                      ) {
+                        createMessage(
+                          input.yupError || 'Please provide valid info',
+                          'error'
+                        )
+                        return
                       }
-                    }
-                  }}
-                />
-                {input.links && (
-                  <div className="flex flex-row gap-4 items-center justify-end text-xs">
-                    {input.links.map((link, index) => (
-                      <a
-                        key={index}
-                        href={link.url}
-                        target="_blank"
-                        rel="noreferrer">
-                        {link.title}
-                      </a>
-                    ))}
-                  </div>
-                )}
-                {input.minLength && input.minLength > 1 && (
-                  <div className="text-xs m-0 mb-6">
-                    <div className="flex flex-row gap-4 items-center text-xs text-gray-500">
-                      <span className="p-0">
-                        <span id={`progress-${input.name}-value`}>0</span>/
-                        {input.minLength}
-                      </span>
-                      <progress
-                        id={`progress-${input.name}`}
-                        className="progress progress-warning w-full"
-                        value={0}
-                        max={input.minLength}></progress>
+                    }}
+                    onChange={(e) => {
+                      input.update(e.target.value.trim())
+                      const progress = e.target.value.trim().length
+                      const progressElement = document.getElementById(
+                        `progress-${input.name}`
+                      )
+                      const progressValueElement = document.getElementById(
+                        `progress-${input.name}-value`
+                      )
+                      if (progressValueElement) {
+                        progressValueElement.innerText = progress.toString()
+                      }
+                      if (progressElement && input.minLength) {
+                        progressElement.setAttribute(
+                          'value',
+                          progress.toString()
+                        )
+                        if (progress > input.minLength) {
+                          progressElement.classList.remove('progress-success')
+                          progressElement.classList.remove('progress-warning')
+                          progressElement.classList.add('progress-error')
+                        } else if (progress < input.minLength / 2) {
+                          progressElement.classList.remove('progress-error')
+                          progressElement.classList.remove('progress-success')
+                          progressElement.classList.add('progress-warning')
+                        } else {
+                          progressElement.classList.remove('progress-error')
+                          progressElement.classList.remove('progress-warning')
+                          progressElement.classList.add('progress-success')
+                        }
+                      }
+                    }}
+                  />
+                  {input.links && (
+                    <div className="flex flex-row gap-4 items-center justify-end text-xs">
+                      {input.links.map((link, index) => (
+                        <a
+                          key={index}
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer">
+                          {link.title}
+                        </a>
+                      ))}
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </form>
-          <div className="flex flex-row gap-4 justify-center my-6">
-            <Button
-              text="Get results"
-              onClick={() => {
-                document
-                  .getElementById('header-results')
-                  ?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            />
-            <Button
-              text="Test with fake data"
-              onClick={() => {
-                const fakeData = {
-                  title:
-                    'SEO 4 Devs - A tool for developers to improve their SEO',
-                  url: 'https://seo-4-devs.netlify.app/',
-                  description: `This tool is for developers who want to improve their site's SEO. It generates meta tags for Facebook, Twitter, Google Analytics and basic SEO tags.`,
-                  keywords: `SEO, search engine optimization, developers, web development, meta tags, Facebook, Twitter, Google Analytics, canonical link, description, keywords, on-page SEO`,
-                  ogImage: 'https://seo-4-devs.netlify.app/metatag.png',
-                  googleAnalyticsId: 'G-ZNRHESS7KL'
-                }
-                setTitle(fakeData.title)
-                setUrl(fakeData.url)
-                setDescription(fakeData.description)
-                setKeywords(fakeData.keywords)
-                setOgImage(fakeData.ogImage)
-                setGoogleAnalyticsId(fakeData.googleAnalyticsId)
-
-                Object.entries(fakeData).forEach(([key, value]) => {
-                  const inputElement = document.getElementById(
-                    `input-${key}`
-                  ) as HTMLInputElement
-                  if (!inputElement) return
-                  inputElement.value = value
-                })
-
-                document
-                  .getElementById('header-results')
-                  ?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            />
-          </div>
-        </SmallView>
-        <BigView>
-          <div>
-            <h2
-              className="text-center"
-              id="header-results">
-              Results
-            </h2>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <Card
-                title="Basic SEO Tags"
-                children={
-                  <textarea
-                    id="textarea-basic"
-                    placeholder="Basic SEO tags will appear here."
-                    className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
-                    value={basicSEOTags}
-                    readOnly
-                    onClick={(e) => {
-                      e.currentTarget.select()
-                    }}></textarea>
-                }
-                detailsDescription="Paste this in your head tag. Basic SEO tags."
-                details={[
-                  `Canonical link - tells search engines the main URL`,
-                  `Description - what your site is about`,
-                  `Keywords - important words for your site`
-                ]}
-                actions={
-                  <>
-                    <Button
-                      icon={<Copy />}
-                      text="Copy HTML"
-                      onClick={() => {
-                        if (!testURL()) {
-                          createMessage(
-                            'Please provide a URL for your site first',
-                            'error'
-                          )
-                          return
-                        }
-                        handleClickCopyButton('textarea-basic')
-                      }}
-                    />
-                  </>
-                }
+                  )}
+                  {input.minLength && input.minLength > 1 && (
+                    <div className="text-xs m-0 mb-6">
+                      <div className="flex flex-row gap-4 items-center text-xs text-gray-500">
+                        <span className="p-0">
+                          <span id={`progress-${input.name}-value`}>0</span>/
+                          {input.minLength}
+                        </span>
+                        <progress
+                          id={`progress-${input.name}`}
+                          className="progress progress-warning w-full"
+                          value={0}
+                          max={input.minLength}></progress>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </form>
+            <div className="flex flex-row gap-4 justify-center my-6">
+              <Button
+                text="Get results"
+                onClick={() => {
+                  document
+                    .getElementById('header-results')
+                    ?.scrollIntoView({ behavior: 'smooth' })
+                }}
               />
+              <Button
+                text="Test with fake data"
+                onClick={() => {
+                  const fakeData = {
+                    title:
+                      'SEO 4 Devs - A tool for developers to improve their SEO',
+                    url: 'https://seo-4-devs.netlify.app/',
+                    description: `This tool is for developers who want to improve their site's SEO. It generates meta tags for Facebook, Twitter, Google Analytics and basic SEO tags.`,
+                    keywords: `SEO, search engine optimization, developers, web development, meta tags, Facebook, Twitter, Google Analytics, canonical link, description, keywords, on-page SEO`,
+                    ogImage: 'https://seo-4-devs.netlify.app/metatag.png',
+                    googleAnalyticsId: 'G-ZNRHESS7KL'
+                  }
+                  setTitle(fakeData.title)
+                  setUrl(fakeData.url)
+                  setDescription(fakeData.description)
+                  setKeywords(fakeData.keywords)
+                  setOgImage(fakeData.ogImage)
+                  setGoogleAnalyticsId(fakeData.googleAnalyticsId)
 
-              <Card
-                title="Facebook Meta Tags"
-                children={
-                  <textarea
-                    id="textarea-facebook"
-                    placeholder="Facebook metatags will appear here."
-                    className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
-                    value={facebookMetaTags}
-                    readOnly
-                    onClick={(e) => {
-                      e.currentTarget.select()
-                    }}></textarea>
-                }
-                detailsDescription="Paste this in your head tag. Ensures your site looks good when shared on Facebook."
-                details={[
-                  `URL - your site's URL`,
-                  `Type - website`,
-                  `Title - your site's title`,
-                  `Description - your site's description`,
-                  `Image - your site's share image`,
-                  `Note: Ignore the fb:app_id error when you press the test button`
-                ]}
-                actions={
-                  <>
-                    <Button
-                      icon={<Copy />}
-                      text="Copy HTML"
-                      onClick={() => {
-                        if (!testURL()) {
-                          createMessage(
-                            'Please provide a URL for your site first',
-                            'error'
-                          )
-                          return
-                        }
-                        handleClickCopyButton('textarea-facebook')
-                      }}
-                    />
-                    <Button
-                      icon={<ArrowSquareOut />}
-                      text="Test on Facebook"
-                      onClick={() => {
-                        if (!testURL()) {
-                          createMessage(
-                            'Please provide a URL for your site first',
-                            'error'
-                          )
-                          return
-                        }
-                        window.open(
-                          `https://developers.facebook.com/tools/debug/?q=${url}`,
-                          '_blank'
-                        )
-                      }}
-                    />
-                  </>
-                }
-              />
+                  Object.entries(fakeData).forEach(([key, value]) => {
+                    const inputElement = document.getElementById(
+                      `input-${key}`
+                    ) as HTMLInputElement
+                    if (!inputElement) return
+                    inputElement.value = value
+                  })
 
-              <Card
-                title="Twitter Meta Tags"
-                children={
-                  <textarea
-                    id="textarea-twitter"
-                    placeholder="Twitter metatags will appear here."
-                    className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
-                    value={twitterMetaTags}
-                    readOnly
-                    onClick={(e) => {
-                      e.currentTarget.select()
-                    }}></textarea>
-                }
-                detailsDescription="Paste this in your head tag. Ensures your site looks good when shared on Twitter."
-                details={[
-                  `Card - summary_large_image`,
-                  `Domain - your site domain`,
-                  `URL - your site's URL`,
-                  `Title - your site's title`,
-                  `Description - your site's description`,
-                  `Image - your site's share image`
-                ]}
-                actions={
-                  <>
-                    <Button
-                      icon={<Copy />}
-                      text="Copy HTML"
-                      onClick={() => {
-                        if (!testURL()) {
-                          createMessage(
-                            'Please provide a URL for your site first',
-                            'error'
-                          )
-                          return
-                        }
-                        handleClickCopyButton('textarea-twitter')
-                      }}
-                    />
-                    <Button
-                      icon={<ArrowSquareOut />}
-                      text="Test on Twitter"
-                      onClick={() => {
-                        if (!url || url.length < 1 || !url.includes('http')) {
-                          createMessage(
-                            'Please provide a URL for your site first',
-                            'error'
-                          )
-                          return
-                        }
-                        window.open(
-                          `https://twitter.com/intent/post?text=${url}`,
-                          '_blank'
-                        )
-                      }}
-                    />
-                  </>
-                }
-              />
-
-              <Card
-                title="Google Analytics"
-                children={
-                  <textarea
-                    id="textarea-ga"
-                    placeholder="Google Analytics script will appear here."
-                    className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
-                    value={googleAnalyticsScript}
-                    readOnly
-                    onClick={(e) => {
-                      e.currentTarget.select()
-                    }}></textarea>
-                }
-                detailsDescription="Paste this in your head tag. Requires a Google Analytics account set up first."
-                details={[
-                  `Async script - loads analytics script`,
-                  `Config - sets up analytics w. current date`
-                ]}
-                actions={
-                  <>
-                    <Button
-                      icon={<Copy />}
-                      text="Copy HTML"
-                      onClick={() => {
-                        if (
-                          !googleAnalyticsId ||
-                          googleAnalyticsId.length < 1 ||
-                          !googleAnalyticsId.toLowerCase().includes('g-')
-                        ) {
-                          createMessage(
-                            'Please provide a Google Analytics ID first',
-                            'error'
-                          )
-                          return
-                        }
-                        handleClickCopyButton('textarea-ga')
-                      }}
-                    />
-                    <Button
-                      icon={<ArrowSquareOut />}
-                      text="Google Search Console"
-                      onClick={() => {
-                        if (
-                          !googleAnalyticsId ||
-                          googleAnalyticsId.length < 1 ||
-                          !googleAnalyticsId.toLowerCase().includes('g-')
-                        ) {
-                          createMessage(
-                            'Please provide a Google Analytics ID first',
-                            'error'
-                          )
-                          return
-                        }
-                        window.open(
-                          `https://search.google.com/search-console`,
-                          '_blank'
-                        )
-                      }}
-                    />
-                    <Button
-                      icon={<ArrowSquareOut />}
-                      text="Check Analytics"
-                      onClick={() => {
-                        if (
-                          !googleAnalyticsId ||
-                          googleAnalyticsId.length < 1 ||
-                          !googleAnalyticsId.toLowerCase().includes('g-')
-                        ) {
-                          createMessage(
-                            'Please provide a Google Analytics ID first',
-                            'error'
-                          )
-                          return
-                        }
-                        window.open(
-                          `https://analytics.google.com/analytics/web/`,
-                          '_blank'
-                        )
-                      }}
-                    />
-                  </>
-                }
+                  document
+                    .getElementById('header-results')
+                    ?.scrollIntoView({ behavior: 'smooth' })
+                }}
               />
             </div>
-          </div>
-        </BigView>
-
-        <SmallView>
-          <div>
-            <Card
-              title="SEO Checklist"
-              detailsDescription=""
-              children={
-                <div>
-                  {seoChecklist &&
-                    Object.keys(seoChecklist as ChecklistType).map(
-                      (category: string, index: number) => (
-                        <div key={index}>
-                          <h3 className="text-lg m-0 mt-6">{category}</h3>
-                          {(seoChecklist as any)[category].map(
-                            (item: ChecklistItem, index: number) => (
-                              <div
-                                key={index}
-                                className="flex flex-col">
-                                {item.tasks.map(
-                                  (task: string, index: number) => (
-                                    <div
-                                      className="form-control flex flex-row"
-                                      key={index}>
-                                      <label className="label cursor-pointer flex flex-row gap-2">
-                                        <input type="checkbox" />
-                                        <span className="label-text text-xs">
-                                          {task}
-                                        </span>
-                                      </label>
-                                    </div>
-                                  )
-                                )}
-                                {item.links && (
-                                  <>
-                                    <div className="flex flex-row gap-4 items-center justify-start text-xs mt-3 flex-wrap">
-                                      {item.links.map((link, index: number) => (
-                                        <Button
-                                          icon={<ArrowSquareOut />}
-                                          key={index}
-                                          text={link.text}
-                                          onClick={() =>
-                                            window.open(link.url, '_blank')
-                                          }
-                                        />
-                                      ))}
-                                    </div>
-                                  </>
-                                )}
-                              </div>
+          </SmallView>
+          <BigView>
+            <div>
+              <h2
+                className="text-center"
+                id="header-results">
+                Results
+              </h2>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <Card
+                  title="Basic SEO Tags"
+                  children={
+                    <textarea
+                      id="textarea-basic"
+                      placeholder="Basic SEO tags will appear here."
+                      className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
+                      value={basicSEOTags}
+                      readOnly
+                      onClick={(e) => {
+                        e.currentTarget.select()
+                      }}></textarea>
+                  }
+                  detailsDescription="Paste this in your head tag. Basic SEO tags."
+                  details={[
+                    `Canonical link - tells search engines the main URL`,
+                    `Description - what your site is about`,
+                    `Keywords - important words for your site`
+                  ]}
+                  actions={
+                    <>
+                      <Button
+                        icon={<Copy />}
+                        text="Copy HTML"
+                        onClick={() => {
+                          if (!testURL()) {
+                            createMessage(
+                              'Please provide a URL for your site first',
+                              'error'
                             )
-                          )}
-                        </div>
-                      )
-                    )}
-                </div>
-              }
-            />
-          </div>
-        </SmallView>
+                            return
+                          }
+                          handleClickCopyButton('textarea-basic')
+                        }}
+                      />
+                    </>
+                  }
+                />
 
-        <BigView>
-          <div>
-            <h2 className="text-center">Useful Stuff</h2>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <Card
-                title="External SEO Tools"
-                detailsDescription="Check your site with these tools to ensure it's optimised for search engines and social media. As these are external tools, I can't guarantee their availability or accuracy."
-                actions={
-                  <>
-                    {externalTools.map((tool, index) => (
+                <Card
+                  title="Facebook Meta Tags"
+                  children={
+                    <textarea
+                      id="textarea-facebook"
+                      placeholder="Facebook metatags will appear here."
+                      className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
+                      value={facebookMetaTags}
+                      readOnly
+                      onClick={(e) => {
+                        e.currentTarget.select()
+                      }}></textarea>
+                  }
+                  detailsDescription="Paste this in your head tag. Ensures your site looks good when shared on Facebook."
+                  details={[
+                    `URL - your site's URL`,
+                    `Type - website`,
+                    `Title - your site's title`,
+                    `Description - your site's description`,
+                    `Image - your site's share image`,
+                    `Note: Ignore the fb:app_id error when you press the test button`
+                  ]}
+                  actions={
+                    <>
+                      <Button
+                        icon={<Copy />}
+                        text="Copy HTML"
+                        onClick={() => {
+                          if (!testURL()) {
+                            createMessage(
+                              'Please provide a URL for your site first',
+                              'error'
+                            )
+                            return
+                          }
+                          handleClickCopyButton('textarea-facebook')
+                        }}
+                      />
                       <Button
                         icon={<ArrowSquareOut />}
-                        key={index}
-                        text={tool.title}
-                        onClick={tool.onClick}
+                        text="Test on Facebook"
+                        onClick={() => {
+                          if (!testURL()) {
+                            createMessage(
+                              'Please provide a URL for your site first',
+                              'error'
+                            )
+                            return
+                          }
+                          window.open(
+                            `https://developers.facebook.com/tools/debug/?q=${url}`,
+                            '_blank'
+                          )
+                        }}
                       />
-                    ))}
-                  </>
+                    </>
+                  }
+                />
+
+                <Card
+                  title="Twitter Meta Tags"
+                  children={
+                    <textarea
+                      id="textarea-twitter"
+                      placeholder="Twitter metatags will appear here."
+                      className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
+                      value={twitterMetaTags}
+                      readOnly
+                      onClick={(e) => {
+                        e.currentTarget.select()
+                      }}></textarea>
+                  }
+                  detailsDescription="Paste this in your head tag. Ensures your site looks good when shared on Twitter."
+                  details={[
+                    `Card - summary_large_image`,
+                    `Domain - your site domain`,
+                    `URL - your site's URL`,
+                    `Title - your site's title`,
+                    `Description - your site's description`,
+                    `Image - your site's share image`
+                  ]}
+                  actions={
+                    <>
+                      <Button
+                        icon={<Copy />}
+                        text="Copy HTML"
+                        onClick={() => {
+                          if (!testURL()) {
+                            createMessage(
+                              'Please provide a URL for your site first',
+                              'error'
+                            )
+                            return
+                          }
+                          handleClickCopyButton('textarea-twitter')
+                        }}
+                      />
+                      <Button
+                        icon={<ArrowSquareOut />}
+                        text="Test on Twitter"
+                        onClick={() => {
+                          if (!url || url.length < 1 || !url.includes('http')) {
+                            createMessage(
+                              'Please provide a URL for your site first',
+                              'error'
+                            )
+                            return
+                          }
+                          window.open(
+                            `https://twitter.com/intent/post?text=${url}`,
+                            '_blank'
+                          )
+                        }}
+                      />
+                    </>
+                  }
+                />
+
+                <Card
+                  title="Google Analytics"
+                  children={
+                    <textarea
+                      id="textarea-ga"
+                      placeholder="Google Analytics script will appear here."
+                      className="textarea textarea-bordered textarea-lg w-full box-border h-48 text-xs no-scrollbar"
+                      value={googleAnalyticsScript}
+                      readOnly
+                      onClick={(e) => {
+                        e.currentTarget.select()
+                      }}></textarea>
+                  }
+                  detailsDescription="Paste this in your head tag. Requires a Google Analytics account set up first."
+                  details={[
+                    `Async script - loads analytics script`,
+                    `Config - sets up analytics w. current date`
+                  ]}
+                  actions={
+                    <>
+                      <Button
+                        icon={<Copy />}
+                        text="Copy HTML"
+                        onClick={() => {
+                          if (
+                            !googleAnalyticsId ||
+                            googleAnalyticsId.length < 1 ||
+                            !googleAnalyticsId.toLowerCase().includes('g-')
+                          ) {
+                            createMessage(
+                              'Please provide a Google Analytics ID first',
+                              'error'
+                            )
+                            return
+                          }
+                          handleClickCopyButton('textarea-ga')
+                        }}
+                      />
+                      <Button
+                        icon={<ArrowSquareOut />}
+                        text="Google Search Console"
+                        onClick={() => {
+                          if (
+                            !googleAnalyticsId ||
+                            googleAnalyticsId.length < 1 ||
+                            !googleAnalyticsId.toLowerCase().includes('g-')
+                          ) {
+                            createMessage(
+                              'Please provide a Google Analytics ID first',
+                              'error'
+                            )
+                            return
+                          }
+                          window.open(
+                            `https://search.google.com/search-console`,
+                            '_blank'
+                          )
+                        }}
+                      />
+                      <Button
+                        icon={<ArrowSquareOut />}
+                        text="Check Analytics"
+                        onClick={() => {
+                          if (
+                            !googleAnalyticsId ||
+                            googleAnalyticsId.length < 1 ||
+                            !googleAnalyticsId.toLowerCase().includes('g-')
+                          ) {
+                            createMessage(
+                              'Please provide a Google Analytics ID first',
+                              'error'
+                            )
+                            return
+                          }
+                          window.open(
+                            `https://analytics.google.com/analytics/web/`,
+                            '_blank'
+                          )
+                        }}
+                      />
+                    </>
+                  }
+                />
+              </div>
+            </div>
+          </BigView>
+
+          <SmallView>
+            <div>
+              <Card
+                title="SEO Checklist"
+                detailsDescription=""
+                children={
+                  <div>
+                    {seoChecklist &&
+                      Object.keys(seoChecklist as ChecklistType).map(
+                        (category: string, index: number) => (
+                          <div key={index}>
+                            <h3 className="text-lg m-0 mt-6">{category}</h3>
+                            {(seoChecklist as any)[category].map(
+                              (item: ChecklistItem, index: number) => (
+                                <div
+                                  key={index}
+                                  className="flex flex-col">
+                                  {item.tasks.map(
+                                    (task: string, index: number) => (
+                                      <div
+                                        className="form-control flex flex-row"
+                                        key={index}>
+                                        <label className="label cursor-pointer flex flex-row gap-2">
+                                          <input type="checkbox" />
+                                          <span className="label-text text-xs">
+                                            {task}
+                                          </span>
+                                        </label>
+                                      </div>
+                                    )
+                                  )}
+                                  {item.links && (
+                                    <>
+                                      <div className="flex flex-row gap-4 items-center justify-start text-xs mt-3 flex-wrap">
+                                        {item.links.map(
+                                          (link, index: number) => (
+                                            <Button
+                                              icon={<ArrowSquareOut />}
+                                              key={index}
+                                              text={link.text}
+                                              onClick={() =>
+                                                window.open(link.url, '_blank')
+                                              }
+                                            />
+                                          )
+                                        )}
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+                              )
+                            )}
+                          </div>
+                        )
+                      )}
+                  </div>
                 }
               />
-              <Card
-                title="SEO Common Words"
-                detailsDescription="The lingo used by SEO experts."
-                details={[
-                  `SEO - Search Engine Optimisation`,
-                  `SERP - Search Engine Results Page`,
-                  `CTR - Click Through Rate`,
-                  `CMS - Content Management System`,
-                  `GA - Google Analytics`,
-                  `GSC - Google Search Console`,
-                  `On Page SEO - Optimising content on your site`,
-                  `Off Page SEO - Optimising content off your site`,
-                  `Backlink - A link from another site to yours - builds authority`,
-                  `Keyword - A word or phrase that describes your content`,
-                  `Meta Tags - Information about your site for search engines`,
-                  `Canonical - Tells Search Engines the main URL of your site`,
-                  `Alt Text - Descriptive text for images (alt="Description")`
-                ]}
-              />
             </div>
-          </div>
-        </BigView>
+          </SmallView>
 
-        <BigView>
-          <div>
-            <h2 className="text-center">About</h2>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <Card
-                title="What is SEO 4 Devs?"
-                detailsDescription="This tool is for web developers and website owners who want to
+          <BigView>
+            <div>
+              <h2 className="text-center">Useful Stuff</h2>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <Card
+                  title="External SEO Tools"
+                  detailsDescription="Check your site with these tools to ensure it's optimised for search engines and social media. As these are external tools, I can't guarantee their availability or accuracy."
+                  actions={
+                    <>
+                      {externalTools.map((tool, index) => (
+                        <Button
+                          icon={<ArrowSquareOut />}
+                          key={index}
+                          text={tool.title}
+                          onClick={tool.onClick}
+                        />
+                      ))}
+                    </>
+                  }
+                />
+                <Card
+                  title="SEO Common Words"
+                  detailsDescription="The lingo used by SEO experts."
+                  details={[
+                    `SEO - Search Engine Optimisation`,
+                    `SERP - Search Engine Results Page`,
+                    `CTR - Click Through Rate`,
+                    `CMS - Content Management System`,
+                    `GA - Google Analytics`,
+                    `GSC - Google Search Console`,
+                    `On Page SEO - Optimising content on your site`,
+                    `Off Page SEO - Optimising content off your site`,
+                    `Backlink - A link from another site to yours - builds authority`,
+                    `Keyword - A word or phrase that describes your content`,
+                    `Meta Tags - Information about your site for search engines`,
+                    `Canonical - Tells Search Engines the main URL of your site`,
+                    `Alt Text - Descriptive text for images (alt="Description")`
+                  ]}
+                />
+              </div>
+            </div>
+          </BigView>
+
+          <BigView>
+            <div>
+              <h2 className="text-center">About</h2>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <Card
+                  title="What is SEO 4 Devs?"
+                  detailsDescription="This tool is for web developers and website owners who want to
               improve their site's SEO. It generates meta tags for Facebook, Twitter, Google Analytics and basic SEO tags. The tool is free to use. The idea came from my own experience as a web developer and consultant for companies, where I noticed a need for great SEO, but most tools were annoying or suggested changing things that didn't matter. I hope you find this tool useful."
-              />
-              <Card
-                title="Who made this?"
-                detailsDescription="I'm Tomo, a web developer and SEO consultant. I love building things and helping others. I'm always looking for feedback and ways to improve this tool. If you have any suggestions or want to say hi, please reach out."
-                actions={
-                  <>
-                    <Button
-                      icon={<Envelope />}
-                      text="Email"
-                      onClick={() =>
-                        window.open(
-                          'mailto:tomo@neontomo.com?subject=SEO 4 Devs'
-                        )
-                      }
-                    />
-                    <Button
-                      icon={<ArrowSquareOut />}
-                      text="Github"
-                      onClick={() =>
-                        window.open('https://github.com/neontomo', '_blank')
-                      }
-                    />
-                    <Button
-                      icon={<ArrowSquareOut />}
-                      text="LinkedIn"
-                      onClick={() =>
-                        window.open(
-                          'https://www.linkedin.com/in/tomo-myrman',
-                          '_blank'
-                        )
-                      }
-                    />
-                  </>
-                }
-              />
+                />
+                <Card
+                  title="Who made this?"
+                  detailsDescription="I'm Tomo, a web developer and SEO consultant. I love building things and helping others. I'm always looking for feedback and ways to improve this tool. If you have any suggestions or want to say hi, please reach out."
+                  actions={
+                    <>
+                      <Button
+                        icon={<Envelope />}
+                        text="Email"
+                        onClick={() =>
+                          window.open(
+                            'mailto:tomo@neontomo.com?subject=SEO 4 Devs'
+                          )
+                        }
+                      />
+                      <Button
+                        icon={<ArrowSquareOut />}
+                        text="Github"
+                        onClick={() =>
+                          window.open('https://github.com/neontomo', '_blank')
+                        }
+                      />
+                      <Button
+                        icon={<ArrowSquareOut />}
+                        text="LinkedIn"
+                        onClick={() =>
+                          window.open(
+                            'https://www.linkedin.com/in/tomo-myrman',
+                            '_blank'
+                          )
+                        }
+                      />
+                    </>
+                  }
+                />
+              </div>
             </div>
-          </div>
-        </BigView>
+          </BigView>
 
-        <div
-          id="errors"
-          className="fixed bottom-4 right-4 flex flex-col gap-4">
-          {messages.map((message, index) => (
-            <Message
-              key={index}
-              message={message.message}
-              type={message.type}
-            />
-          ))}
+          <div
+            id="errors"
+            className="fixed bottom-4 right-4 flex flex-col gap-4">
+            {messages.map((message, index) => (
+              <Message
+                key={index}
+                message={message.message}
+                type={message.type}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
 
