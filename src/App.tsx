@@ -872,6 +872,16 @@ function App() {
                       />
                       <Button
                         icon={<ArrowSquareOut />}
+                        text="Github repo"
+                        onClick={() =>
+                          window.open(
+                            'https://github.com/neontomo/seo-4-devs',
+                            '_blank'
+                          )
+                        }
+                      />
+                      <Button
+                        icon={<ArrowSquareOut />}
                         text="LinkedIn"
                         onClick={() =>
                           window.open(
