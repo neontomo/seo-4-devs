@@ -1,14 +1,3 @@
-/* 
-
-TODO:
-- Add footer with links to Github, Twitter, LinkedIn and my name
-- Add a "copy all" button
-- Add a "reset all" button
-- Link to Github repo
-- link to Github checklist
-
-*/
-
 import Message from './components/Message'
 import { SmallView, BigView } from './components/Views'
 import { useEffect, useState } from 'react'
@@ -459,13 +448,11 @@ function App() {
               text="Test with fake data"
               onClick={() => {
                 const fakeData = {
-                  title: 'Tomo Myrman - Software Developer Consultant for hire',
-                  url: 'https://neontomo.com',
-                  description:
-                    'I build websites, make products and implement search engine optimisations to help you grow your business or project.',
-                  keywords:
-                    'software developer consultant, developer, web design, websites, build websites, SEO, consultant, entrepreneur, web developer, web designer, hire, neontomo, tomo myrman',
-                  ogImage: 'https://neontomo.com/img/metatags.png',
+                  title: 'SEO 4 Devs',
+                  url: 'https://seo-4-devs.netlify.app/',
+                  description: `This tool is for developers who want to improve their site's SEO. It generates meta tags for Facebook, Twitter, Google Analytics and basic SEO tags.`,
+                  keywords: `SEO, search engine optimization, developers, web development, meta tags, Facebook, Twitter, Google Analytics, canonical link, description, keywords, on-page SEO`,
+                  ogImage: 'https://seo-4-devs.netlify.app/metatag.png',
                   googleAnalyticsId: 'G-ZNRHESS7KL'
                 }
                 setTitle(fakeData.title)
