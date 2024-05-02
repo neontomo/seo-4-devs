@@ -177,6 +177,12 @@ function App() {
       }
     },
     {
+      title: 'Favicon Generator',
+      onClick: () => {
+        window.open(`https://realfavicongenerator.net/`, '_blank')
+      }
+    },
+    {
       title: 'Favicon Checker',
       onClick: () => {
         let domain = url
@@ -191,12 +197,6 @@ function App() {
           `https://realfavicongenerator.net/favicon_checker${domain}`,
           '_blank'
         )
-      }
-    },
-    {
-      title: 'Favicon Generator',
-      onClick: () => {
-        window.open(`https://realfavicongenerator.net/`, '_blank')
       }
     },
     {
@@ -356,7 +356,7 @@ function App() {
       <div className="my-32 grow">
         <SmallView noGap>
           <nav className="flex flex-col gap-4 mb-16">
-            <h1 className="text-center m-0">SEO FOR DEVS</h1>
+            <h1 className="text-center m-0">SEO 4 Devs</h1>
             <h4 className="text-center m-0">
               Work hard on your next client instead
             </h4>
@@ -740,7 +740,7 @@ function App() {
 
         <BigView>
           <div>
-            <h2 className="text-center">Useful Tools</h2>
+            <h2 className="text-center">Useful Stuff</h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <Card
                 title="External SEO Tools"
@@ -781,7 +781,7 @@ function App() {
           </div>
         </BigView>
 
-        <BigView>
+        <SmallView>
           <div>
             <Card
               title="SEO Checklist"
@@ -843,14 +843,14 @@ function App() {
               }
             />
           </div>
-        </BigView>
+        </SmallView>
 
         <BigView>
           <div>
             <h2 className="text-center">About</h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <Card
-                title="What is SEO For Devs?"
+                title="What is SEO 4 Devs?"
                 detailsDescription="This tool is for web developers and website owners who want to
               improve their site's SEO. It generates meta tags for Facebook, Twitter, Google Analytics and basic SEO tags. The tool is free to use. The idea came from my own experience as a web developer and consultant for companies, where I noticed a need for great SEO, but most tools were annoying or suggested changing things that didn't matter. I hope you find this tool useful."
               />
@@ -864,7 +864,7 @@ function App() {
                       text="Email"
                       onClick={() =>
                         window.open(
-                          'mailto:tomo@neontomo.com?subject=SEO For Devs'
+                          'mailto:tomo@neontomo.com?subject=SEO 4 Devs'
                         )
                       }
                     />
