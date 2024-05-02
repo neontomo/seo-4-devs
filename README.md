@@ -6,6 +6,11 @@ A tool for developers to improve their SEO
 
 https://seo-4-devs.netlify.app
 
+## Images
+<img width="960" alt="meta2" src="https://github.com/neontomo/seo-for-devs/assets/105588693/b5c01123-b9f2-40a2-a4b7-156f79ea4e50">
+<img width="960" alt="meta1" src="https://github.com/neontomo/seo-for-devs/assets/105588693/0dbf1b74-ca5c-4f05-8a81-8e28fc073e31">
+
+
 ## Overview
 
 SEO 4 Devs is a free tool that helps web developers and website owners optimize their sites for search engines. It generates the necessary meta tags for Facebook, Twitter, Google Analytics, and basic SEO, making it easy to implement best practices.
