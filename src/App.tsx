@@ -1,4 +1,3 @@
-import Message from './components/Message'
 import { SmallView, BigView } from './components/Views'
 import { useEffect, useState } from 'react'
 import Card from './components/Card'
@@ -7,6 +6,7 @@ import { ArrowSquareOut, Copy, Envelope } from '@phosphor-icons/react'
 import { ChecklistItem, ChecklistType, seoChecklist } from './assets/checklist'
 import * as yup from 'yup'
 import NavBar from './components/NavBar'
+import Alert from './components/Alert'
 
 function App() {
   const [title, setTitle] = useState('')
@@ -19,9 +19,7 @@ function App() {
   const [twitterMetaTags, setTwitterMetaTags] = useState('')
   const [googleAnalyticsScript, setGoogleAnalyticsScript] = useState('')
   const [basicSEOTags, setBasicSEOTags] = useState('')
-  const [messages, setMessages] = useState<{ message: string; type: string }[]>(
-    []
-  )
+  const [alerts, setAlerts] = useState<{ text: string; type: string }[]>([])
 
   const inputs = [
     {
@@ -198,7 +196,7 @@ function App() {
   ]
 
   const handleClickCopyButton = (textareaId: string) => {
-    createMessage(
+    createAlert(
       'Copied to clipboard, now paste in <head> tag of your site',
       'success'
     )
@@ -220,21 +218,21 @@ function App() {
     return true
   }
 
-  const createMessage = (message: string, type: string) => {
-    setMessages([{ message, type }, ...messages])
+  const createAlert = (text: string, type: string) => {
+    setAlerts([{ text, type }, ...alerts])
   }
 
   useEffect(() => {
-    if (messages.length > 0) {
+    if (alerts.length > 0) {
       const x = setTimeout(() => {
-        setMessages(messages.slice(0, messages.length - 1))
+        setAlerts(alerts.slice(0, alerts.length - 1))
       }, 3000)
 
       return () => {
         clearTimeout(x)
       }
     }
-  }, [messages])
+  }, [alerts])
 
   const generateTagOrError = (
     property: string,
@@ -341,6 +339,14 @@ function App() {
     generateBasicSEOTags()
   }, [url, description, title, ogImage, googleAnalyticsId, keywords])
 
+  function toggleCheckbox(checkbox: HTMLElement) {
+    const fillType = checkbox.classList[1]
+    const newFillType =
+      fillType === 'default' ? 'half' : fillType === 'half' ? 'full' : 'default'
+
+    checkbox.classList.replace(fillType, newFillType)
+  }
+
   return (
     <>
       <NavBar />
@@ -349,6 +355,7 @@ function App() {
           <SmallView noGap>
             <nav className="flex flex-col gap-4 mb-16">
               <h1 className="text-center m-0">SEO 4 Devs</h1>
+
               <h4 className="text-center m-0">
                 Work hard on your next client instead
               </h4>
@@ -370,7 +377,7 @@ function App() {
                         input.yup &&
                         !input.yup.isValidSync(e.target.value.trim())
                       ) {
-                        createMessage(
+                        createAlert(
                           input.yupError || 'Please provide valid info',
                           'error'
                         )
@@ -518,7 +525,7 @@ function App() {
                         text="Copy HTML"
                         onClick={() => {
                           if (!testURL()) {
-                            createMessage(
+                            createAlert(
                               'Please provide a URL for your site first',
                               'error'
                             )
@@ -560,7 +567,7 @@ function App() {
                         text="Copy HTML"
                         onClick={() => {
                           if (!testURL()) {
-                            createMessage(
+                            createAlert(
                               'Please provide a URL for your site first',
                               'error'
                             )
@@ -574,7 +581,7 @@ function App() {
                         text="Test on Facebook"
                         onClick={() => {
                           if (!testURL()) {
-                            createMessage(
+                            createAlert(
                               'Please provide a URL for your site first',
                               'error'
                             )
@@ -619,7 +626,7 @@ function App() {
                         text="Copy HTML"
                         onClick={() => {
                           if (!testURL()) {
-                            createMessage(
+                            createAlert(
                               'Please provide a URL for your site first',
                               'error'
                             )
@@ -633,7 +640,7 @@ function App() {
                         text="Test on Twitter"
                         onClick={() => {
                           if (!url || url.length < 1 || !url.includes('http')) {
-                            createMessage(
+                            createAlert(
                               'Please provide a URL for your site first',
                               'error'
                             )
@@ -678,7 +685,7 @@ function App() {
                             googleAnalyticsId.length < 1 ||
                             !googleAnalyticsId.toLowerCase().includes('g-')
                           ) {
-                            createMessage(
+                            createAlert(
                               'Please provide a Google Analytics ID first',
                               'error'
                             )
@@ -696,7 +703,7 @@ function App() {
                             googleAnalyticsId.length < 1 ||
                             !googleAnalyticsId.toLowerCase().includes('g-')
                           ) {
-                            createMessage(
+                            createAlert(
                               'Please provide a Google Analytics ID first',
                               'error'
                             )
@@ -717,7 +724,7 @@ function App() {
                             googleAnalyticsId.length < 1 ||
                             !googleAnalyticsId.toLowerCase().includes('g-')
                           ) {
-                            createMessage(
+                            createAlert(
                               'Please provide a Google Analytics ID first',
                               'error'
                             )
@@ -743,6 +750,10 @@ function App() {
                 detailsDescription=""
                 children={
                   <div>
+                    <p>
+                      Note: This checklist uses a tri-state checkbox system.
+                      Click to mark as not done, half done or done.
+                    </p>
                     {seoChecklist &&
                       Object.keys(seoChecklist as ChecklistType).map(
                         (category: string, index: number) => (
@@ -759,8 +770,21 @@ function App() {
                                         className="form-control flex flex-row"
                                         key={index}>
                                         <label className="label cursor-pointer flex flex-row gap-2">
-                                          <input type="checkbox" />
-                                          <span className="label-text text-xs">
+                                          <div
+                                            className="checkbox default"
+                                            onClick={(e) =>
+                                              toggleCheckbox(
+                                                e.target as HTMLElement
+                                              )
+                                            }></div>
+                                          <span
+                                            className="label-text text-xs"
+                                            onClick={(e) =>
+                                              toggleCheckbox(
+                                                (e.target as HTMLElement)
+                                                  .previousElementSibling as HTMLElement
+                                              )
+                                            }>
                                             {task}
                                           </span>
                                         </label>
@@ -900,11 +924,11 @@ function App() {
           <div
             id="errors"
             className="fixed bottom-4 right-4 flex flex-col gap-4">
-            {messages.map((message, index) => (
-              <Message
+            {alerts.map((alert, index) => (
+              <Alert
                 key={index}
-                message={message.message}
-                type={message.type}
+                text={alert.text}
+                type={alert.type}
               />
             ))}
           </div>

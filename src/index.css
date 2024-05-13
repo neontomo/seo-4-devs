@@ -95,3 +95,48 @@ button:focus-visible {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+/* CHECKBOXES */
+
+.checkbox-group {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.checkbox {
+  height: 10px;
+  width: 10px;
+  border: 1px solid #333;
+  border-radius: 3px;
+  padding: 3px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.checkbox-group:hover .checkbox {
+  opacity: 1;
+}
+
+.checkbox::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.checkbox.half::after {
+  background: linear-gradient(135deg, #333 50%, transparent 50%);
+}
+
+.checkbox.full::after {
+  background: #333;
+}
+
+.checkbox-group label {
+  cursor: pointer;
+  user-select: none;
+}
