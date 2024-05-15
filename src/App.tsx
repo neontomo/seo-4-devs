@@ -332,6 +332,39 @@ function App() {
     setBasicSEOTags(tags.join('\n'))
   }
 
+  const triggerProgressBars = () => {
+    inputs.forEach((input) => {
+      const inputElement = document.getElementById(`input-${input.name}`) as HTMLInputElement;
+      const inputValue = inputElement?.value.trim();
+      
+      if (!inputValue) return; 
+      input.update(inputValue);
+
+      const progressElement = document.getElementById(`progress-${input.name}`);
+      const progressValueElement = document.getElementById(`progress-${input.name}-value`);
+
+      if (progressElement && progressValueElement) {
+        const progress = inputValue.length;
+        progressValueElement.innerText = progress.toString();
+        progressElement.setAttribute('value', progress.toString());
+
+        if (input.minLength && progress > input.minLength) {
+          progressElement.classList.remove('progress-success');
+          progressElement.classList.remove('progress-warning');
+          progressElement.classList.add('progress-error');
+        } else if (input.minLength && progress < input.minLength / 2) {
+          progressElement.classList.remove('progress-error');
+          progressElement.classList.remove('progress-success');
+          progressElement.classList.add('progress-warning');
+        } else {
+          progressElement.classList.remove('progress-error');
+          progressElement.classList.remove('progress-warning');
+          progressElement.classList.add('progress-success');
+        }
+      }
+    });
+  };
+
   useEffect(() => {
     generateFacebookMetatags()
     generateTwitterMetatags()
@@ -484,6 +517,7 @@ function App() {
                     inputElement.value = value
                   })
 
+                  triggerProgressBars();
                   document
                     .getElementById('header-results')
                     ?.scrollIntoView({ behavior: 'smooth' })
