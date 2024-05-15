@@ -334,36 +334,40 @@ function App() {
 
   const triggerProgressBars = () => {
     inputs.forEach((input) => {
-      const inputElement = document.getElementById(`input-${input.name}`) as HTMLInputElement;
-      const inputValue = inputElement?.value.trim();
-      
-      if (!inputValue) return; 
-      input.update(inputValue);
+      const inputElement = document.getElementById(
+        `input-${input.name}`
+      ) as HTMLInputElement
+      const inputValue = inputElement?.value.trim()
 
-      const progressElement = document.getElementById(`progress-${input.name}`);
-      const progressValueElement = document.getElementById(`progress-${input.name}-value`);
+      if (!inputValue) return
+      input.update(inputValue)
+
+      const progressElement = document.getElementById(`progress-${input.name}`)
+      const progressValueElement = document.getElementById(
+        `progress-${input.name}-value`
+      )
 
       if (progressElement && progressValueElement) {
-        const progress = inputValue.length;
-        progressValueElement.innerText = progress.toString();
-        progressElement.setAttribute('value', progress.toString());
+        const progress = inputValue.length
+        progressValueElement.innerText = progress.toString()
+        progressElement.setAttribute('value', progress.toString())
 
         if (input.minLength && progress > input.minLength) {
-          progressElement.classList.remove('progress-success');
-          progressElement.classList.remove('progress-warning');
-          progressElement.classList.add('progress-error');
+          progressElement.classList.remove('progress-success')
+          progressElement.classList.remove('progress-warning')
+          progressElement.classList.add('progress-error')
         } else if (input.minLength && progress < input.minLength / 2) {
-          progressElement.classList.remove('progress-error');
-          progressElement.classList.remove('progress-success');
-          progressElement.classList.add('progress-warning');
+          progressElement.classList.remove('progress-error')
+          progressElement.classList.remove('progress-success')
+          progressElement.classList.add('progress-warning')
         } else {
-          progressElement.classList.remove('progress-error');
-          progressElement.classList.remove('progress-warning');
-          progressElement.classList.add('progress-success');
+          progressElement.classList.remove('progress-error')
+          progressElement.classList.remove('progress-warning')
+          progressElement.classList.add('progress-success')
         }
       }
-    });
-  };
+    })
+  }
 
   useEffect(() => {
     generateFacebookMetatags()
@@ -417,38 +421,7 @@ function App() {
                         return
                       }
                     }}
-                    onChange={(e) => {
-                      input.update(e.target.value.trim())
-                      const progress = e.target.value.trim().length
-                      const progressElement = document.getElementById(
-                        `progress-${input.name}`
-                      )
-                      const progressValueElement = document.getElementById(
-                        `progress-${input.name}-value`
-                      )
-                      if (progressValueElement) {
-                        progressValueElement.innerText = progress.toString()
-                      }
-                      if (progressElement && input.minLength) {
-                        progressElement.setAttribute(
-                          'value',
-                          progress.toString()
-                        )
-                        if (progress > input.minLength) {
-                          progressElement.classList.remove('progress-success')
-                          progressElement.classList.remove('progress-warning')
-                          progressElement.classList.add('progress-error')
-                        } else if (progress < input.minLength / 2) {
-                          progressElement.classList.remove('progress-error')
-                          progressElement.classList.remove('progress-success')
-                          progressElement.classList.add('progress-warning')
-                        } else {
-                          progressElement.classList.remove('progress-error')
-                          progressElement.classList.remove('progress-warning')
-                          progressElement.classList.add('progress-success')
-                        }
-                      }
-                    }}
+                    onChange={() => triggerProgressBars()}
                   />
                   {input.links && (
                     <div className="flex flex-row gap-4 items-center justify-end text-xs">
@@ -517,7 +490,7 @@ function App() {
                     inputElement.value = value
                   })
 
-                  triggerProgressBars();
+                  triggerProgressBars()
                   document
                     .getElementById('header-results')
                     ?.scrollIntoView({ behavior: 'smooth' })
