@@ -7,9 +7,9 @@ A tool for developers to improve their SEO
 https://seo-4-devs.netlify.app
 
 ## Images
+
 <img width="960" alt="meta2" src="https://github.com/neontomo/seo-for-devs/assets/105588693/b5c01123-b9f2-40a2-a4b7-156f79ea4e50">
 <img width="960" alt="meta1" src="https://github.com/neontomo/seo-for-devs/assets/105588693/0dbf1b74-ca5c-4f05-8a81-8e28fc073e31">
-
 
 ## Overview
 
@@ -37,5 +37,5 @@ The tool was created by Tomo, a web developer and SEO consultant, to address the
 
 If you have any suggestions or feedback, or would like to contribute to the project, please reach out to Tomo:
 
-- Email: tomo@neontomo.com
+- Email: tomomyrman+neontomo@proton.me
 - LinkedIn: https://www.linkedin.com/in/tomo-myrman

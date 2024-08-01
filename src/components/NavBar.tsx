@@ -12,7 +12,7 @@ export default function NavBar() {
         <ul className="menu menu-horizontal px-1">
           <li>
             <a
-              href="mailto:tomo@neontomo.com"
+              href="mailto:tomomyrman+neontomo@proton.me"
               className="tooltip tooltip-left"
               data-tip="Email me">
               Email

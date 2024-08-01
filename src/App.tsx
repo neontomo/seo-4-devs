@@ -890,7 +890,7 @@ function App() {
                         text="Email"
                         onClick={() =>
                           window.open(
-                            'mailto:tomo@neontomo.com?subject=SEO 4 Devs'
+                            'mailto:tomomyrman+neontomo@proton.me?subject=SEO 4 Devs'
                           )
                         }
                       />
